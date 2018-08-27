@@ -1,0 +1,3 @@
+trainingData, grabé 4 carás en jpg .85 de quality. 20 muestras por cara.
+Luego, testData, es lo mismo, mismo escenario para testear lo anterior.
+

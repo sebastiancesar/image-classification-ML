@@ -30,3 +30,5 @@ tensorboard==1.9.0
 tensorflow==1.9.0
 termcolor==1.1.0
 Werkzeug==0.14.1
+sklearn
+opencv-python
