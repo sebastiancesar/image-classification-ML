@@ -15,6 +15,7 @@ NUM_CLASS = 4
 MODEL_NAME = 'mobilenet'
 CROP_FACES = True
 
+
 class FacenetDataset:
 
     def __init__(self, model_name):
@@ -77,6 +78,7 @@ class Clasificados:
 
     def reset(self):
         self.dataset = Dataset(model_name=MODEL_NAME)
+        print('reseted')
 
     def clean_data_holder(self):
         self.dataset = Dataset(model_name=MODEL_NAME)

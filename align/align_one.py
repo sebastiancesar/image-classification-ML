@@ -40,6 +40,9 @@ class Aligner:
         bounding_boxes, _ = detect_face.detect_face(img, MIN_SIZE, self.pnet, self.rnet, self.onet,
             THRESHOLD, FACTOR)
         nrof_faces = bounding_boxes.shape[0]
+        if nrof_faces <= 0:
+            print('**-*-*-*-* No face detected *-*-*----*')
+            return img
         if nrof_faces > 0:
             det = bounding_boxes[:, 0:4]
             det_arr = []
