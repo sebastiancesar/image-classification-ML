@@ -9,7 +9,6 @@ app = Flask(__name__)
 cors = CORS(app)
 
 socketio = SocketIO(app)
-print ('**********************ABOUT TO CREATE A PREDICTOR********************************')
 clasificados = Clasificados(local=False)
 
 
@@ -86,8 +85,10 @@ def backend_add_sample(data):
 @socketio.on('backend_train')
 def backend_train():
     clasificados.train()
+    emit('training_completed')
 
 
+# DEPRECATED - Use add_sample instead.
 @socketio.on('backend_train_samples')
 def backend_train_samples(samples):
     clasificados.train_samples(samples)
