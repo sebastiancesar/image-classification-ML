@@ -1,6 +1,9 @@
+aligned_images/
 bin/
 include/
 lib/
+images/
+old-src/
 .idea/
 local/
 *.pyc
