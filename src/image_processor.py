@@ -2,10 +2,13 @@ import base64
 from PIL import Image
 from StringIO import StringIO
 import align.align_one as aligner
+import numpy as np
+from tensorflow.keras.applications.mobilenet import preprocess_input
 
 CROP_FACES = True
 
-class ImageProccesor:
+
+class ImageProcessor:
 
     def __init__(self, crop_face=CROP_FACES):
         self.crop_face = crop_face
