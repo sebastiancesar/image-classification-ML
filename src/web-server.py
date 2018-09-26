@@ -16,7 +16,7 @@ def log_uncaught(exctype, value, tb):
     logger.error('Traceback:', tb)
 
 
-sys.excepthook = logger
+#sys.excepthook = logger
 # initialize Flask
 app = Flask(__name__)
 cors = CORS(app)
