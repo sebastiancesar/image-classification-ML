@@ -46,19 +46,7 @@ class Aligner:
             det = bounding_boxes[:, 0:4]
             det_arr = []
             img_size = np.asarray(img.shape)[0:2]
-            if nrof_faces > 1:
-                if MULTIPLE_FACES:
-                    for i in range(nrof_faces):
-                        det_arr.append(np.squeeze(det[i]))
-                else:
-                    bounding_box_size = (det[:, 2]-det[:, 0])*(det[:, 3]-det[:, 1])
-                    img_center = img_size / 2
-                    offsets = np.vstack([(det[:, 0] + det[:, 2]) / 2 - img_center[1],
-                                         (det[:, 1] + det[:, 3]) / 2 - img_center[0]])
-                    offset_dist_squared = np.sum(np.power(offsets, 2.0), 0)
-                    index = np.argmax(bounding_box_size-offset_dist_squared*2.0)  # some extra weight on the centering
-                    det_arr.append(det[index, :])
-            else:
+            if nrof_faces == 1:
                 det_arr.append(np.squeeze(det))
 
                 for i, det in enumerate(det_arr):
@@ -75,7 +63,18 @@ class Aligner:
                 # imagen = Image.fromarray(scaled)
                 # imagen.save('./tito.jpg')
                 return scaled
-
+            elif nrof_faces > 1:
+                if MULTIPLE_FACES:
+                    for i in range(nrof_faces):
+                        det_arr.append(np.squeeze(det[i]))
+                else:
+                    bounding_box_size = (det[:, 2]-det[:, 0])*(det[:, 3]-det[:, 1])
+                    img_center = img_size / 2
+                    offsets = np.vstack([(det[:, 0] + det[:, 2]) / 2 - img_center[1],
+                                         (det[:, 1] + det[:, 3]) / 2 - img_center[0]])
+                    offset_dist_squared = np.sum(np.power(offsets, 2.0), 0)
+                    index = np.argmax(bounding_box_size-offset_dist_squared*2.0)  # some extra weight on the centering
+                    det_arr.append(det[index, :])
 
     def process_base64(base64str):
         image_data = base64.b64decode(base64str)

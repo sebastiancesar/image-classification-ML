@@ -47,14 +47,27 @@ def backend_reset(data):
 
 @socketio.on('backend_add_sample')
 def backend_add_sample(data):
-    clasificados.add_sample(session_id=data['sessionId'],
-                            img_str=data['sample'],
-                            class_id=data['class_id'])
+    response = clasificados.add_sample(session_id=data['sessionId'],
+                                       img_str=data['sample'],
+                                       class_id=data['class_id'])
+    # if response:
+    #     logger.debug('backend_add_sample > sending img sample class %s', response['class_id'])
+    #     emit('trainig_img_classes', response)
+
+
+# @socketio.on('backend_get_img_classes')
+# def backend_get_img_classes(data):
+#     logger.debug('backend get_img_classes')
+#     emit('training_img_classes', {
+#         'img_classes': clasificados.get_classes_img(session_id=data['sessionId'])
+#         })
+#     logger.debug('backend training_img_classes')
 
 
 @socketio.on('backend_train')
 def backend_train(data):
-    clasificados.train(session_id=data['sessionId'])
+    # emit('training_for', {'img_classes': clasificados.get_img_clasess()})
+    _ = clasificados.train(session_id=data['sessionId'])
     emit('training_completed')
 
 

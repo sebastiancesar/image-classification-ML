@@ -48,11 +48,13 @@ class CaripelaClassifier:
         return history
 
     def add_sample(self, session_id, img_str, class_id):
-        img_array = self.image_processor.get_img_array_from_base64(img_str)
+        img_array, img_face = self.image_processor.get_img_array_from_base64(img_str)
         activation = self.prediction_model.predict_mobilenet(img_array)
         dataset = self.sessions[session_id]['dataset']
         dataset.add_sample(activation, class_id)
         logger.debug('sample added for class %s for session_id %s', class_id, session_id)
+        #return self.add_sample_img(session_id, class_id, img_face)
+
 
     def predict(self, session_id, img_str):
         # validate there is a custom_model
@@ -64,5 +66,14 @@ class CaripelaClassifier:
         confidence = prediction[0][resolved_class]
         confidence = str(round(confidence, 2))
         result = {'class_id': resolved_class, 'confidence': confidence}
-        print(result)
+        logger.debug(result)
         return result
+
+    def add_sample_img(self, session_id, class_id, img_face_array):
+        dataset = self.sessions[session_id]['dataset']
+        return dataset.add_sample_img(class_id, self.image_processor.array_to_base64(img_face_array))
+
+    def get_classes_img(self, session_id):
+        dataset = self.sessions[session_id]['dataset']
+        return dataset.get_samples_img()
+
