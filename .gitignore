@@ -7,3 +7,8 @@ old-src/
 .idea/
 local/
 *.pyc
+.key.pem
+.cert.pem
+.directory
+./src/certificates
+./src/tests
