@@ -59,7 +59,7 @@ class CaripelaClassifier:
     def predict(self, session_id, img_str):
         # validate there is a custom_model
         custom_model = self.sessions[session_id]['custom_model']
-        img_array = self.image_processor.get_img_array_from_base64(img_str)
+        img_array, img_face = self.image_processor.get_img_array_from_base64(img_str)
         activation = self.prediction_model.predict_mobilenet(img_array)
         prediction = self.prediction_model.predict_custom(activation, custom_model)
         resolved_class = np.argmax(prediction)

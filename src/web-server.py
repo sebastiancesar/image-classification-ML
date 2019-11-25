@@ -79,7 +79,7 @@ def backend_predict(data):
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='192.168.0.155',
+    socketio.run(app, host='192.168.1.100',
                  debug=True,
                  use_reloader=False,
                  keyfile='./src/certificates/server.key',  # key.pem',
