@@ -4,7 +4,7 @@ backports.weakref==1.0.post1
 click==6.7
 dnspython==1.15.0
 enum34==1.1.6
-eventlet==0.24.0
+eventlet==0.31.0
 Flask==1.0.2
 Flask-Cors==3.0.6
 Flask-SocketIO==3.0.1
